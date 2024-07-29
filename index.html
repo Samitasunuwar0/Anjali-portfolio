@@ -283,24 +283,23 @@
                     <form action="" class="contact_form grid">
                         <div class="contact_inputs grid">
                             <div class="contact_content">
-                                <label for="" class="contact_label">Full Name</label>
-                                <input type="text" class="contact_input">
+                                <label for="contact_name" class="contact_label">Full Name</label>
+                                <input type="text" class="contact_input" id="contact_name" onkeyup="validateName()">
+                                <span id="name_error"></span>
                             </div>
                             <div class="contact_content">
-                                <label for="" class="contact_label">Email</label>
-                                <input type="email" class="contact_input">
+                                <label for="contact_email" class="contact_label">Email</label>
+                                <input type="email" class="contact_input" id="contact_email" onkeyup="validateEmail()">
+                                <span id="email_error"></span>
                             </div>
                         </div>
                         <div class="contact_content">
-                            <label for="" class="contact_label">Your Message...</label>
-                            <textarea name="" id="" cols="0" rows="7" class="contact_input"></textarea>
+                            <label for="contact_message" class="contact_label">Your Message...</label>
+                            <textarea cols="0" rows="7" class="contact_input" id="contact_message" onkeyup="validateMessage()"></textarea>
+                            <span id="message_error"></span>
                         </div>
-                        <div>
-                            <a href="#" class="button button">
-                                Send Message
-                                <i class="uil uil-message button_icon"></i>
-                            </a>
-                        </div>
+                        <button onclick="return validateForm()">Send Message</button>
+                        <span id="submit_error"></span>
                     </form>
                 </div>
             </section>
@@ -315,13 +314,13 @@
                         </div>
                         <ul class="footer_link">
                             <li>
-                                <a href="#skills" class="footer_link">Skills</a> 
+                                <a href="#skills" class="footer_link">Skills</a>
                             </li>
                             <li>
-                            <a href="#service" class="footer_link">Services</a> 
+                            <a href="#service" class="footer_link">Services</a>
                             </li>
                             <li>
-                                <a href="#contact" class="footer_link">ContactMe</a> 
+                                <a href="#contact" class="footer_link">ContactMe</a>
                             </li>
                         </ul>
                         <div class="footer_social">

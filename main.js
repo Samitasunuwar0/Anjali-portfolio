@@ -1,62 +1,58 @@
-const navMenu = document.getElementById('nav-menu'),
-      navToggle = document.getElementById('nav-toggle'),
-      navClose = document.getElementById('nav-close')
-      if(navToggle){
-        navToggle.addEventListener('click', () =>{
-            navMenu.classList.add('show-menu')
-        })
-      }
-      if(navClose){
-        navClose.addEventListener('click', () =>{
-            navMenu.classList.remove('show-menu')
-        })
-      }
-      const navLink = document.querySelectorAll('.nav_link')
-      
-      function linkAction(){
-        const navMenu = document.getElementById('nav-menu')
-        navMenu.classList.remove('show-menu')
-      }
-      navLink.forEach(n => n.addEventListener('click', linkAction))
-      /*Scroll sections active link */
+var nameError = document.getElementById('name_error');
+var emailError = document.getElementById('email_error');
+var messageError = document.getElementById('message_error');
+var submitError = document.getElementById('submit_error');
 
-      const sections = document.querySelectorAll('section[id]')
-      
-      function scrollActive(){
-        const scrollY = window.pageYOffset
+function validateName() {
+    var name = document.getElementById('contact_name').value;
 
-        sections.forEach(current =>{
-          const sectionHeight = current.offsetHeight
-          const sectionTop = current.offsetTop - 50;
-          sectionId = current.getAttribute('id')
+    if (name.length == 0) {
+        nameError.innerHTML = "Name is required.";
+        return false;
+    }
+    if (!name.match(/^[A-Za-z]+\s[A-Za-z]+$/)) {
+        nameError.innerHTML = "Write Your Full Name.";
+        return false;
+    }
+    nameError.innerHTML = "Valid";
+    return true;
+}
 
-          if(scrollY > sectionTop && scrollY <= sectionTop + sectionHeight){
-            document.querySelector('.nav_menu a[href*=' + sectionId + ']').classList.add('active-link')
-          }else{
-            document.querySelector('.nav_menu a[href*=' + sectionId + ']').classList.remove('active-link')
-          }
-     
-        })
-      }
-      window.addEventListener('scroll', scrollActive)
-      /* change background header */
-      function scrollHeader(){
-        const nav = document.getElementById('header')
-        if(this.scrollY >= 80) nav.classList.add('scroll-header'); else nav.classList.remove('scroll-header')
-      }
-      window.addEventListener('scroll, scrollHeader')
+function validateEmail() {
+    var email = document.getElementById('contact_email').value;
 
-      /* show scroll */
-      function scrollUp(){
-        const scrollUp = document.getElementById('scroll-up');
-        if(this.scrollY >= 560) scrollUp.classList.add('show-scroll'); else scrollUp.classList.remove('show-scroll')
-      }
-      window.addEventListener('scroll', scrollUp)
+    if (email.length == 0) {
+        emailError.innerHTML = 'Email is required.';
+        return false;
+    }
+    if (!email.match(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}$/)) {
+        emailError.innerHTML = 'Email Invalid';
+        return false;
+    }
+    emailError.innerHTML = 'Valid';
+    return true;
+}
 
-      var change = document.getElementById("change");
-      
-      change.oneclick = function(){
-        document.body.classList.toogle(dark-theme);
-      }
+function validateMessage() {
+    var message = document.getElementById('contact_message').value;
+    var required = 30;
+    var left = required - message.length;
+    if (left > 0) {
+        messageError.innerHTML = left + ' more characters required';
+        return false;
+    }
+    messageError.innerHTML = 'Valid';
+    return true;
+}
 
-      
+function validateForm() {
+    if (!validateName() || !validateEmail() || !validateMessage()) {
+        submitError.style.display = 'block';
+        submitError.innerHTML = 'Please fill out the form correctly.';
+        setTimeout(function() {
+            submitError.style.display = 'none';
+        }, 3000);
+        return false;
+    }
+    return true;
+}
